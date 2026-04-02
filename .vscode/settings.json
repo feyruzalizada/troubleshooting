@@ -1,0 +1,11 @@
+{
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "editor.rulers": [100],
+  "files.exclude": { "node_modules": true, "build": true },
+  "javascript.suggest.autoImports": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "debug.openDebug": "openOnDebugBreak",
+  "debug.javascript.autoAttachFilter": "smart",
+  "eslint.validate": ["javascript", "javascriptreact"]
+}
