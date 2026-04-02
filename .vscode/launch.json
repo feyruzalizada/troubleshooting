@@ -1,0 +1,52 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Chrome: Debug Enterprise Platform",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/src",
+      "sourceMapPathOverrides": {
+        "webpack:///src/*": "${webRoot}/*"
+      },
+      "runtimeArgs": ["--remote-debugging-port=9222", "--auto-open-devtools-for-tabs"]
+    },
+    {
+      "name": "Chrome: Attach to Running",
+      "type": "chrome",
+      "request": "attach",
+      "port": 9222,
+      "webRoot": "${workspaceFolder}/src",
+      "sourceMapPathOverrides": {
+        "webpack:///src/*": "${webRoot}/*"
+      }
+    },
+    {
+      "name": "Node: Debug React Scripts",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--inspect", "${workspaceFolder}/node_modules/.bin/react-scripts", "start"],
+      "env": { "BROWSER": "none", "NODE_ENV": "development" },
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Jest: Run All Tests",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/react-scripts",
+      "args": ["test", "--watchAll=false", "--runInBand"],
+      "env": { "CI": "true" },
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Full Stack: App + Chrome",
+      "configurations": ["Node: Debug React Scripts", "Chrome: Attach to Running"],
+      "stopAll": true
+    }
+  ]
+}
