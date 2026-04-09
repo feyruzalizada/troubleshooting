@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import GlobalErrorBoundary from './components/ErrorBoundary/GlobalErrorBoundary';
+import ReliabilityDashboard from './components/Dashboard/ReliabilityDashboard';
+import { initSession } from './utils/metrics';
+import { startAllMonitoring } from './services/monitoring';
+import { startBusinessMetricSimulation } from './services/analytics';
+import { logger } from './utils/logger';
 
-const App = () => (
-  <div style={{ minHeight: '100vh', background: '#0f172a', color: '#e2e8f0',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontFamily: 'monospace', fontSize: '18px' }}>
-    Enterprise Reliability Platform -- bootstrapping...
-  </div>
-);
+const App = () => {
+  useEffect(() => {
+    initSession();
+    startAllMonitoring();
+    startBusinessMetricSimulation(4000);
+    logger.info('App', 'Enterprise Reliability Platform initialized');
+  }, []);
+
+  return (
+    <GlobalErrorBoundary>
+      <ReliabilityDashboard />
+    </GlobalErrorBoundary>
+  );
+};
 
 export default App;
