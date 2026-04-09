@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import PlatformErrorBoundary from '../ErrorBoundary/PlatformErrorBoundary';
 
-const TABS = ['Performance', 'Alerts'];
+const TABS = ['Performance', 'Business Metrics', 'Alerts', 'Error Tracking'];
 
 const styles = {
   root:   { minHeight: '100vh', background: '#0f172a', color: '#e2e8f0', fontFamily: 'monospace' },
   topBar: { background: '#1e293b', borderBottom: '1px solid #334155', padding: '0 32px',
-            display: 'flex', alignItems: 'center', height: '56px' },
+            display: 'flex', alignItems: 'center', height: '56px', position: 'sticky', top: 0, zIndex: 100 },
   logo:   { color: '#e2e8f0', fontWeight: 800, fontSize: '16px' },
   main:   { padding: '24px 32px' },
   tabBar: { display: 'flex', gap: '4px', marginBottom: '24px', borderBottom: '1px solid #1e293b' },
@@ -26,7 +27,9 @@ const ReliabilityDashboard = () => {
         <div style={styles.tabBar}>
           {TABS.map((t) => <button key={t} style={styles.tab(tab === t)} onClick={() => setTab(t)}>{t}</button>)}
         </div>
-        <div style={styles.placeholder}>{tab} -- coming soon</div>
+        <PlatformErrorBoundary platform="dashboard" component={tab}>
+          <div style={styles.placeholder}>{tab} -- coming soon</div>
+        </PlatformErrorBoundary>
       </div>
     </div>
   );
