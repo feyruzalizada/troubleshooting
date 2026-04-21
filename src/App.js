@@ -11,7 +11,7 @@ const App = () => {
     initSession();
     startAllMonitoring();
     startBusinessMetricSimulation(4000);
-    logger.info('App', 'Enterprise Reliability Platform initialized');
+    logger.info('App', 'Feyruz Review');
   }, []);
 
   return (
